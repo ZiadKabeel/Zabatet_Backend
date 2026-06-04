@@ -2,6 +2,7 @@ import express from 'express';
 import taskRoutes from './taskRouts.js';
 import boardRoutes from './boardRouts.js';
 import authRoutes from './auth.router.js';
+import workspaceRoutes from './workspaceRoutes.js';
 const router = express.Router();
 
 // Use auth routes
@@ -12,5 +13,8 @@ router.use('/tasks', taskRoutes);
 
 // Use board routes
 router.use('/boards', boardRoutes);
+
+// Use workspace routes
+router.use('/workspaces', workspaceRoutes);
 
 export default router;
