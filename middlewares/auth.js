@@ -2,10 +2,16 @@ import jwt from "jsonwebtoken";
 import ApiError from "../utils/ApiError.js";
 
 const authMiddleware = async (req, res, next) => {
-    const token = req.cookies?.token;
+    let token = req.cookies?.token;
 
     if (!token) {
+        const authHeader = req.headers.authorization;
+        if (authHeader) {
+            token = authHeader;
+        }
+    }
 
+    if (!token) {
         throw new ApiError(401, "Unauthorized: please log in");
     }
 
@@ -14,9 +20,8 @@ const authMiddleware = async (req, res, next) => {
         req.user = decoded;
         next();
     } catch (err) {
-
         res.clearCookie("token", { httpOnly: true, sameSite: "strict" });
-        throw new ApiError(401, "Unauthorized: token invalid or expired ");
+        throw new ApiError(401, "Unauthorized: token invalid or expired");
     }
 };
 
