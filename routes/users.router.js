@@ -10,15 +10,15 @@ import authMiddleware from "../middlewares/auth.js";
 import authorize from "../middlewares/authorize.js";
 
 const router = express.Router();
+router.use(authMiddleware);
+router.get("/", authorize("Admin"), getUsers);
 
-router.get("/", authMiddleware, authorize("Admin"), getUsers);
-
-router.get("/me", authMiddleware, getUserInfo);
+router.get("/me", getUserInfo);
 
 router.get("/email/:email", getUsersByEmail);
 
-router.get("/:id", getUserById);
+router.get("/:id", authorize("Admin"), getUserById);
 
-router.patch("/me", authMiddleware, updateUser);
+router.patch("/me", updateUser);
 
 export default router;

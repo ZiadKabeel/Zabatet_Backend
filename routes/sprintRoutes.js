@@ -10,8 +10,11 @@ import {
     addTasksToSprint,
     removeTasksFromSprint
 } from '../controllers/sprintController.js';
+import authMiddleware from '../middlewares/auth.js';
 
 const router = express.Router();
+router.use(authMiddleware);
+
 
 router.post('/', createSprint);
 router.get('/board/:boardId', getSprintsByBoard);
