@@ -13,8 +13,8 @@ const getToken = (user) => {
 
 const cookieOptions = {
     httpOnly: true,
-    secure: true,
-    sameSite: "strict",
+    secure: true,       // required when sameSite is 'none'
+    sameSite: "none",   // 'strict' blocks cross-origin cookies; 'none' allows them
     maxAge: 30 * 24 * 60 * 60 * 1000,
 };
 
@@ -60,6 +60,6 @@ export const loginUser = async (req, res) => {
 };
 
 export const logoutUser = async (req, res) => {
-    res.clearCookie("token", { httpOnly: true, sameSite: "strict" });
+    res.clearCookie("token", { httpOnly: true, secure: true, sameSite: "none" });
     return res.status(200).json(new ApiResponse(200, {}, "Logged out successfully"));
 };
