@@ -14,9 +14,8 @@ app.use(cors({
     const allowed = [
       'http://localhost:5173',
       'http://localhost:3000',
-      // process.env.FRONTEND_URL,           // set this on Render to your frontend URL
+      'https://zabatet.onrender.com',
     ].filter(Boolean);
-    // Allow requests with no origin (e.g. mobile apps, curl)
     if (!origin || allowed.includes(origin)) return callback(null, true);
     return callback(new Error('Not allowed by CORS'));
   },
