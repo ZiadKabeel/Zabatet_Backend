@@ -9,10 +9,10 @@ import errorHandler from "./middlewares/errorHandler.js";
 dotenv.config();
 
 const app = express();
-app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true
-}));
+// app.use(cors({
+//   origin: "http://localhost:5173",
+//   credentials: true
+// }));
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
